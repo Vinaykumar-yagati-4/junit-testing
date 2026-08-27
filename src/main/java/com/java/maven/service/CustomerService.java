@@ -1,0 +1,57 @@
+package com.java.maven.service;
+
+import com.java.maven.exception.CustomerExistsException;
+import com.java.maven.exception.CustomerNotFoundException;
+import com.java.maven.model.Customer;
+
+import java.util.List;
+
+public class CustomerService {
+    private List<Customer> customers ;
+
+    public CustomerService(List<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public Customer addCustomer(Customer customer) {
+
+
+        boolean exists = customers.stream()
+                .anyMatch(c -> c.getId() == customer.getId());
+
+        if (exists) {
+            throw new CustomerExistsException("Customer already exists with ID: " + customer.getId());
+        }
+
+        customers.add(customer);
+        return customer;
+    }
+
+    public List<Customer> getAllCustomers() {
+        return customers;
+    }
+
+    public Customer getCustomerById(int id) {
+        return customers.stream()
+                .filter(c -> c.getId() == id)
+                .findFirst()
+                .orElseThrow(() ->
+                        new CustomerNotFoundException("Customer not found with ID: " + id));
+    }
+
+    public boolean deleteCustomer(int id) {
+        boolean removed = customers.removeIf(c -> c.getId() == id);
+
+        if (!removed) {
+            throw new CustomerNotFoundException("Cannot delete. Customer not found with ID: " + id);
+        }
+
+        return true;
+    }
+
+    public double getTotalBalance() {
+        return customers.stream()
+                .mapToDouble(Customer::getBalance)
+                .sum();
+    }
+}
