@@ -1,7 +1,6 @@
 package com.java.maven.repository;
 
 import com.java.maven.model.Customer;
-
 import java.util.List;
 
 public class CustomerRepository {
