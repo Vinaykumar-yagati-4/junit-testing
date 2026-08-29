@@ -4,7 +4,6 @@ import com.java.maven.model.Customer;
 import java.util.List;
 
 public class CustomerRepository {
-
     List<Customer> customers;
     public CustomerRepository(List<Customer> customers) {
         this.customers = customers;
