@@ -7,6 +7,7 @@ import com.java.maven.model.Customer;
 import java.util.List;
 
 public class CustomerService {
+
     private List<Customer> customers ;
 
     public CustomerService(List<Customer> customers) {
