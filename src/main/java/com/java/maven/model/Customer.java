@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
+
 public class Customer {
     private int id;
     private String name;
